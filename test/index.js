@@ -265,6 +265,16 @@ test('preventing simple slippage while recursion handling (Thanks Komlev)', func
   t.end();
 });
 
+test('extend multiple, comma-separated classes', function(t) {
+  compareFixtures(t, 'commas');
+  t.end();
+});
+
+test('extend multiple, comma-separated classes w/ media', function(t) {
+  compareFixtures(t, 'commas-media');
+  t.end();
+});
+
 
 /*END OF FILEBORN TESTS ----------------*/
 test('works when invoked with () or without', function(t) {

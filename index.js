@@ -166,12 +166,12 @@ module.exports = postcss.plugin('postcss-extend', function extend() {
           //If is in @media extending another @media and is a targeted rule (two phase):
           //check for an illegal extention, and then don't process that node.
           } else {
-            for (var i = 0; i < paramsParts.length; i++) {
-              if (subRule.selectors.indexOf(paramsParts[i]) !== -1) {
+            for (var p = 0; p < paramsParts.length; p++) {
+              if (subRule.selectors.indexOf(paramsParts[p]) !== -1) {
                 isBadExtensionPair(atRule, subRule);
               } else {
                 for (var s = 0; s < subRule.selectors.length; s++) {
-                  if (subRule.selectors[s].substring(1).search(/[\s.:#]/) + 1 !== -1 && subRule.selectors[s].substring(0, subRule.selectors[s].substring(1).search(/[\s.:#]/) + 1) === paramsParts[i]) {
+                  if (subRule.selectors[s].substring(1).search(/[\s.:#]/) + 1 !== -1 && subRule.selectors[s].substring(0, subRule.selectors[s].substring(1).search(/[\s.:#]/) + 1) === paramsParts[p]) {
                       isBadExtensionPair(atRule, subRule);
                       break;
                   }
@@ -182,8 +182,8 @@ module.exports = postcss.plugin('postcss-extend', function extend() {
         }); //end of each rule
         while (targetNodeArray.length > 0) {
           backFirstTargetNode = targetNodeArray.pop();
-          for (var i = 0; i < paramsParts.length; i++) {
-            if (backFirstTargetNode.selectors.indexOf(paramsParts[i]) !== -1) {
+          for (var p2 = 0; p2 < paramsParts.length; p2++) {
+            if (backFirstTargetNode.selectors.indexOf(paramsParts[p2]) !== -1) {
               //check if rule has unresolved extensions, then extend them
               if (extensionRecursionHandler(atRule, backFirstTargetNode)) {
                 //We need to re-evaluate the current atRule, as other classes (once passed over) may now be matching, so re-process and exit.
@@ -208,7 +208,7 @@ module.exports = postcss.plugin('postcss-extend', function extend() {
               for (var m = 0; m < backFirstTargetNode.selectors.length; m++) {
                 var extTgtBase = backFirstTargetNode.selectors[m].substring(0, backFirstTargetNode.selectors[m].substring(1).search(/[\s.:#]/) + 1);
                 var extTgtSub = backFirstTargetNode.selectors[m].substring(backFirstTargetNode.selectors[m].substring(1).search(/[\s.:#]/) + 1, backFirstTargetNode.selectors[m].length);
-                if (backFirstTargetNode.selectors[m].substring(1).search(/[\s.:#]/) + 1 !== -1 && extTgtBase === paramsParts[i]) {
+                if (backFirstTargetNode.selectors[m].substring(1).search(/[\s.:#]/) + 1 !== -1 && extTgtBase === paramsParts[p2]) {
                   //check if target rule has unresolved extensions, then extend them
                   if (extensionRecursionHandler(atRule, backFirstTargetNode)) {
                     //We need to re-evaluate the current atRule, as other classes (once passed over) may now be matching, so re-process and exit.

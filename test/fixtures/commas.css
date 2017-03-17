@@ -1,0 +1,25 @@
+.foo {
+  background: pink;
+}
+.bar {
+  color: orange;
+}
+
+.combo {
+  @extend .foo, .bar;
+}
+.combo--missing {
+  @extend , .foo, , .bar, ;
+}
+.combo--multiline {
+  @extend .foo,
+          .bar;
+}
+.combo--multiline-gap {
+  @extend .foo,
+          ,
+          .bar;
+}
+.combo--spaced {
+  @extend .foo,            .bar;
+}

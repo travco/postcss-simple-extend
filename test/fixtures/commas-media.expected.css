@@ -1,0 +1,17 @@
+.foo, .combo {
+  background: pink;
+}
+.bar {
+  font-weight: bold;
+}
+@media(max-width: 600px) {
+  .hat, .combo {
+    color: orange;
+  }
+}
+@media(max-width: 600px) {
+  .mobile {
+  	font-weight: bold;
+  	background: pink;
+  }
+}
