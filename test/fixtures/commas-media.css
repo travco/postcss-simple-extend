@@ -1,0 +1,20 @@
+.foo {
+  background: pink;
+}
+.bar {
+  font-weight: bold;
+}
+@media(max-width: 600px) {
+  .hat {
+    color: orange;
+  }
+}
+
+.combo {
+  @extend .foo, .hat;
+}
+@media(max-width: 600px) {
+  .mobile {
+    @extend .foo, .bar;
+  }
+}

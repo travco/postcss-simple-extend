@@ -1,0 +1,6 @@
+.foo, .combo, .combo--missing, .combo--multiline, .combo--multiline-gap, .combo--spaced {
+  background: pink;
+}
+.bar, .combo, .combo--missing, .combo--multiline, .combo--multiline-gap, .combo--spaced {
+  color: orange;
+}
