@@ -69,6 +69,7 @@ npm install postcss-extend --save-dev
     - [Extending something inside @media (on the outside looking in)](https://github.com/travco/postcss-extend#extending-something-inside-media-on-the-outside-looking-in)
     - [Extending something in an @media while inside an @media](https://github.com/travco/postcss-extend#extending-something-in-an-media-while-inside-an-media)
 - [Chaining `@extend`s, or Extension-Recursion](https://github.com/travco/postcss-extend#chaining-extends-or-extension-recursion)
+- [Getting It Working with SASS](https://github.com/travco/postcss-extend#getting-it-working-with-sass)
 
 ### Defining Placeholders
 
@@ -365,6 +366,18 @@ console.log(outputCss);
 ```
 
 Or take advantage of [any of the myriad of other ways to consume PostCSS](https://github.com/postcss/postcss#usage), and follow the plugin instructions they provide.
+
+## Getting it Working with SASS:
+If you need to run a SASS pre-processor, there is an alias called `@extend-postcss`:
+```css
+.alpha {
+  color: red;
+}
+
+.beta {
+  @extend-postcss .alpha;
+}
+```
 
 ## Quirks
 As with any piece of code, it's got a few quirks. Behaviors that are not intended, and not enforced, may disappear (or be forcibly altered) with the next release, so it's useful to be aware of them.

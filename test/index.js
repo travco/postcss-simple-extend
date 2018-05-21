@@ -287,6 +287,15 @@ test('accepts alternative at-rules', function(t) {
   t.end();
 });
 
+test('accepts alternative extend aliases', function(t) {
+  var standard = p('@define-placeholder bar { background: pink; } .foo { @extend-postcss bar; }');
+  t.equal(
+    p('@define-extend bar { background: pink; } .foo { @extend bar; }'),
+    standard
+  );
+  t.end();
+});
+
 test('eliminates unused definition', function(t) {
   t.equal(p('@define-placeholder foo { background: pink; }'), '');
   t.end();

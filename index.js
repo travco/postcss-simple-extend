@@ -7,7 +7,7 @@ module.exports = postcss.plugin('postcss-extend', function extend() {
 
   return function(css, result) {
     var definingAtRules = ['define-placeholder', 'define-extend', 'extend-define'];
-    var extendingAtRules = ['extend'];
+    var extendingAtRules = ['extend', 'extend-postcss'];
     var recurseStack = [];
     var isAntiPatternCSS = false;
 
