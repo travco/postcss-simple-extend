@@ -3,8 +3,11 @@
 var postcss = require('postcss');
 // /*DEBUG*/var appendout = require('fs').appendFileSync;
 
-module.exports = postcss.plugin('postcss-extend', function extend() {
-
+module.exports = postcss.plugin('postcss-extend', function extend(opts) {
+  opts = opts || {};
+  
+  var keepPlaceholders = opts.keepPlaceholders;
+  
   return function(css, result) {
     var definingAtRules = ['define-placeholder', 'define-extend', 'extend-define'];
     var extendingAtRules = ['extend'];
@@ -33,7 +36,7 @@ module.exports = postcss.plugin('postcss-extend', function extend() {
           } else {
             selectorAccumulator.push(tgtSaved[i]);
           }
-        } else if (tgtSaved.length === 1) {
+        } else if (!keepPlaceholders && tgtSaved.length === 1) {
           targetNode.remove();
         // /*DEBUG*/} else {
           // /*DEBUG*/appendout('./test/debugout.txt', '\nSifted out placeholder/silent ' + tgtSaved[i]);
@@ -342,7 +345,7 @@ module.exports = postcss.plugin('postcss-extend', function extend() {
 
     function findUnresolvedExtendChild(nodeOrigin) {
       var foundNode = {};
-      var foundBool = nodeOrigin.some(function (node) {
+      var foundBool = nodeOrigin.some(function(node) {
         if (node.type === 'atrule' && extendingAtRules.indexOf(node.name) !== -1) {
           foundNode = node;
           return true;
@@ -410,7 +413,7 @@ module.exports = postcss.plugin('postcss-extend', function extend() {
 
     function findBrotherSubClass(nodeOrigin, tgtSub) {
       var foundNode = {};
-      var foundBool = nodeOrigin.parent.some(function (node) {
+      var foundBool = nodeOrigin.parent.some(function(node) {
         if (node.selectors) {
           var seldiff = node.selectors;
           var selectorAccumulator = nodeOrigin.selectors;
